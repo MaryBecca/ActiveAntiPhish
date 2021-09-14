@@ -3,13 +3,16 @@
 Latest Update 2021-09-10_09:30:00_EST
 
 Theory
+
 This repo takes advantage of a technique called database saturation. If your organization is successfully phished this tool allows the organization to increase the noise in the signal to noise ratio of the hacker's stolen credentials. This is done by providing the tool with a fake password list, fake username list, proxy list, the phishing page's callback url, and your organizations email domain extension.
 
 It generates hundreds of fake username/password pairs that are injected into the phishing page.
 The theory is that the phisher will abandon their database as validating thousands of fake accounts just to find the small amount of valid accounts is very annoying.
 
 Practice
+
 You can use the ActiveAntiPhish command line application by downloading the linux release or by installing the rust toolchain and installing aap with cargo install aap. You will then be able to run the aap program from the command line.
+
 aap Help
 ActiveAntiPhish 0.3.0	GNU-GPL-3.0
 Maria Rebecca  Castillo <marybecky@fishlabs.com>
