@@ -1,0 +1,571 @@
+import "hash"
+
+rule phishkit_generic {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-12"
+        updated = "2020-04-29"
+        description = "Triggers on php files that contain indicators that the file is used for stolen credential exfiltration."
+
+    strings:
+        $geo_detection0 = "geoplugin" nocase
+        $geo_detection1 = "geoiptool" nocase
+        $geo_detection2 = "ip-address-lookup-v4"
+        $geo_detection4 = "ipinfodb"
+        $card_verification0 = "lookup.binlist"
+        $UA_detection = "$_SERVER['HTTP_USER_AGENT']" nocase
+        $IP_detection0 = "$_SERVER['HTTP_CLIENT_IP']" nocase
+        $IP_detection1 = "$_SERVER['REMOTE_ADDR']" nocase
+        $IP_detection2 = "gethostbyaddr(" nocase
+        $IP_detection3 = "getenv(\"REMOTE_ADDR\")"
+        $timestamping = "date(" nocase
+        $credential_harvest0 = "$_POST['userid']" nocase
+        $credential_harvest1 = "$_POST['pass']" nocase
+        $credential_harvest2 = "$_POST['Email']" nocase
+        $credential_harvest3 = "$_POST['Passwd']" nocase
+        $credential_harvest4 = "$_POST['username']" nocase
+        $credential_harvest5 = "$_POST['eMailAdd']" nocase
+        $credential_harvest6 = "$_POST['recEmail']" nocase
+        $credential_harvest7 = "$_POST['phoneNumber']" nocase
+        $credential_harvest8 = "$_POST['em']" nocase
+        $credentail_harvest9 = "$_POST['psw']" nocase
+        $credential_harvest10 = "$_POST['id']" nocase
+        $credential_harvest11 = "$_SESSION['_email_']" nocase
+        $credential_harvest12 = "$_SESSION['_password1_']" nocase
+        $credential_harvest13 = "$_SESSION['Eamil']" nocase
+        $credential_harvest14 = "$_POST['pass']" nocase
+        $credential_harvest15 = "$_SESSION['epass']" nocase
+        $credential_harvest16 = "$_SESSION['clientemail']" nocase
+        $credential_harvest17 = "$_POST['EML']" nocase
+        $credential_harvest18 = "$_POST['PWD']" nocase
+        $email_headers0 = "MIME-Version: 1.0" nocase
+        $email_headers1 = "MIME-Version:1.0" nocase
+        $email_exfil = "mail(" nocase
+        $file_exfil0 = "fopen(" nocase
+        $file_exfil1 = "fputs(" nocase
+        $log_tags0 = "Vict!m" nocase
+        $log_tags1 = "Created BY" nocase
+        $log_tags2 = "You have a new drop" nocase
+        $log_tags3 = "Rezultz" nocase
+        $log_tags4 = "Spam ReZulT" nocase
+        $redirect = "header(" nocase
+        $code_comments0 = "//change ur email here"
+        $code_comments1 = "---"
+        $code_comments2 = "==="
+        $code_comments3 = "+++"
+        $code_comments4 = "|||"
+        $php_header = "<?php"
+        $php_header2 = "<?"
+        $php_footer = "?>"
+
+
+    condition:
+        any of ($php*) and any of ($credential_harvest*) and any of ($email*) and 4 of them
+}
+
+rule phishkit_uids {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-13"
+        updated = "2018-06-15"
+        description = "Unique IDs used in phish kits, often emails, usernames, and numbers. This may trigger many false positives depending on what you are scanning"
+
+    strings:
+        $0 = "garrethwebb010"
+        $1 = "xConsoLe"
+        $2 = "+nJoY+"
+        $3 = "dddresult"
+        $4 = "office465"
+        $5 = "office3655"
+        $6 = "strictlydomain"
+        $7 = "*B0y"
+        $8 = "doublerror404"
+        $9 = "gxn31lb1hn5th2kp66zl60tw"
+        $10 = "t2ladon"
+        $11 = "valentinacare11"
+        $12 = "neversaydie"
+        $13 = "shrtt111"
+        $14 = "supertool"
+        $15 = "kevin9angelo"
+        $16 = "ISI PESAN" nocase
+        $17 = "Spam Result" nocase
+        $18 = "freshdude001"
+        $19 = "valinc0147"
+        $20 = "NC3778N12E999MDM3429" nocase
+        $21 = "MR.Int.Tunisien"
+        // $22 = /((?:[a-zA-Z0-9]{20}))/
+        $23 = "JOkEr7"
+        $24 = "dropyefe"
+        $25 = "LvRxDnOnA" nocase
+        $26 = "666133716"
+        $27 = "tacomrcreator"
+        $28 = "jamonte drop" nocase
+        $29 = "goggle.comm"
+        $30 = "REEHDG78273"
+        $40 = "HBUD8373293"
+        $41 = "BigNattY"
+        $42 = "franksam12340"
+        $43 = "jameshang12340"
+        $44 = "bc637518"
+        $45 = "q1y7lddxendi07jbj0mksvf4"
+        $46 = "slimclasss77"
+        $47 = "ericjasonminks150"
+        $48 = "dhotmuller"
+        $49 = "_JeHFUq_VJOXK0QWHtoGYDw1774256418"
+        $50 = "iLNxAnb"
+        $51 = "mailworkstrong1"
+        $52 = "rcazconstructionllc"
+        $53 = "dallasvendorllc"
+        $54 = "junkycrazy"
+        $55 = "dbenito202"
+        $56 = "blessed.muno1"
+        $57 = "cyveillance"
+        $58 = "Hacker Bamo"
+        $59 = "joananndradelozano"
+        $60 = "eppinigeria"
+        $70 = "bdf624a70b290f75ecdf08f61ba30bb97b946fcd08a5dd35eeaabbc7b6b3f354"
+        $71 = "kingservar"
+        $72 = "K1nG^SeRvAr"
+        $73 = "babaservar"
+        $74 = "hackedbykoko"
+        $75 = "jamesalfred2012"
+        $76 = "enricobenettti"
+        $77 = "blessedalilogz"
+        // $78 = "Jboi" nocase // False positives on zip files
+        $79 = "gloryfirmltd"
+        $80 = "OLUWA"
+        $81 = "banklogs1"
+        $82 = "Unknown(doit)com"
+        $83 = "baithwire"
+        $84 = "fud.page" nocase
+        $85 = "fudpage" nocase
+        // $86 = "igma" // too many false positives. Matches source code for "sigma".
+        $87 = "670486322"
+        $88 = "LulzSec"
+        $89 = "harolbwalt"
+        $90 = "phishtank" //used in blocking scripts that block the good guy crawlers.
+        $91 = "mb4504319"
+        $92 = "david_1sc"
+        $93 = "scama-yahya-xhack"
+        $94 = "sand_email"
+        $95 = "❤ ●•۰۰۰۰•● ❤ ●•۰۰۰•●••●●••"
+        $96 = "yahya_email"
+        $97 = "samehman575"
+        $98 = "Bassem_Almasry"
+        $99 = "Scam Page V1"
+        $100 = "SpamRezault"
+        $101 = "NourBlog1"
+        $102 = "rmlacey01"
+        $103 = "ISPA.Team"
+        $104 = "WeStGiRl"
+        $105 = "attahvictorcity"
+        $106 = "oussamadwissel"
+        $107 = "radwanadra12"
+        $108 = "Pro.Spaming"
+        $109 = "spamtools.pro"
+        $110 = "your1@email.com,your2@email.com"
+        $111 = "LI DAMDOUMA KYB9A DAMDOUMA"
+        $112 = "spyus_Hacker"
+        $113 = "yahyazarir"
+        $114 = "YLEH LOOOD T7OWA B L3RBIYA TA3RABT"
+        $115 = "1639-7537-1062-1478<--!-->391f00c002bba88bqs4fs8df865fe15466b8<--!-->9974-5263-1008-8889"
+        $116 = "Officiel.Exploiter"
+        $117 = "By Libyan Shell"
+        $118 = "teamspyus"
+        $119 = "18ac6487d78d85342105b7b34e0d9f38b27a2f92"
+        $120 = "MRX_JOKER"
+        $121 = "omoiyachameh"
+        $122 = "maskyinka"
+        $123 = "codercvvs"
+        $124 = "99,111,100,101,114,99,118,118,115,64,103,109,97,105,108,46,99,111,109"
+        $125 = "zetas.oujda"
+        $126 = "morsyabdo793"
+        $127 = "murphyray123"
+        $128 = "Xclusiv-3D"
+        $129 = "Surelogins2016"
+        $130 = "leesun101"
+        $131 = "kinglawish01"
+        $132 = "shawnpee31"
+        $133 = "ahmed4dam"
+        $134 = "bassem.hithem"
+        $135 = "706704896"
+        $136 = "fudtool" nocase
+        $137 = "ceo.marcoaaron"
+        $138 = "Anonisma-Free-Tools"
+        $139 = "aimenboussadia"
+        $140 = "Anonisma"
+        $141 = "moghul.haroon"
+        $142 = "LYEX8EmkYEoO9wuWuMRtREVaFcD1hlpH"
+        $143 = "trey3way"
+        $144 = "acsh33nz0key"
+        $145 = "2bbdc9f3fb30118c4a380db585adda76"
+        $146 = "!!!!ALUBARIKKA!!!!"
+        $147 = "janefunkey"
+        $148 = "bensonhughes004"
+        $149 = "746001696"
+        $150 = "0032486837923"
+        $151 = "fudpagez"
+        $152 = "noureddine_send1"
+        $153 = "noObass@s!n"
+        $154 = "worldofhack"
+        $155 = "caroline.kanyange"
+        $156 = "danniblazze1"
+        $157 = "deanmr664"
+        $158 = "SweezThaCreator"
+        $159 = "likejempol354"
+        $160 = "PulberAja"
+        $161 = "2f5358752626e2d79a336c455c78090420170804005825"
+        $162 = "sales.departmental45"
+        $163 = "agusta19686"
+        $164 = "C6SORSHOOV9m9D6XG7Qbf777AD_bd9aoHhruf0rYCyuKNkG"
+        $165 = "Sab3on"
+        $166 = "registademnow"
+        $167 = "s4adow.mr"
+        $168 = "L3A9A9"
+        $169 = "yes734"
+        $170 = "KeNiHaCk"
+        $171 = "gmcdonald121"
+        $172 = "sameuletijoro"
+        $173 = "izzyeemoney"
+        $174 = "Settingan From Name/Email"
+        $175 = "XBALTI" nocase
+
+    condition:
+        any of them
+
+}
+
+rule phishkit_abcbank {
+     meta:
+         author = "Maria Rebecca  Castillo"
+         author_email = "marybecky@fishlabs.com"
+         date = "2020-04-17"
+         description = "known AbcBank PhishKits"
+
+     condition:
+         hash.sha256(0, filesize) ==
+         "dd3351a124da3f65674d9460c2dcdbe6c657a532b5533feeb4c37ab48ef064f4"
+}
+
+}
+
+rule phishkit_alibaba {
+     meta:
+         author = "Maria Rebecca  Castillo"
+         author_email = "marybecky@fishlabs.com"
+         date = "2020-04-17"
+         description = "known Alibaba PhishKits"
+
+     condition:
+         hash.sha256(0, filesize) ==
+         "dd3351a124da3f65674d9460c2dcdbe6c657a532b5533feeb4c37ab48ef064f4"
+}
+
+rule phishkit_amazon {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-12"
+        updated = "2018-06-15"
+        description = "Known Amazon PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "3d840b104aea1f863ce456c202d7a92274050812343fc691c4e323ea6f99e21d" or
+        hash.sha256(0, filesize) ==
+        "8ad782b520ac0b38ff32167e1785ab74ac6f775df0aee9822d86f051499725b2" or
+        hash.sha256(0, filesize) ==
+        "ff82d61087f9ef12e6ff43c8f40c3a33200a340c26dccd92a5142f153f441e43" or
+        hash.sha256(0, filesize) ==
+        "f6002679aa5401afc6c1612ba81d64e71a5115817ee8115f797bd4a4015b1d67" or
+        hash.sha256(0, filesize) ==
+        "b36a436adff6d98ebfe70a5cfe68e65010d6e8fe7b861496b207a95a8d5cedbf" or
+        hash.sha256(0, filesize) ==
+        "397efd8be85e38cfd0f5d938977f8ac4f5f3d6c54b365e0ce53ae9e5f72ba556"
+}
+
+
+rule phishkit_cryptotrading {
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-15"
+        description = "hashes of CryptoCurrency trading platform PhishKits"
+
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "14ffe686bc6afba5efa577063fedd89b66977ac939fae03504a39b8b85d86569" or
+        hash.sha256(0, filesize) ==
+        "35b36d56c5e753cf08a5af0c020fdc351e165509b0bd12f96845bd6ce314eb14" or
+        hash.sha256(0, filesize) ==
+        "82a7f11e2dd14c8ccf0b4904b29bc9f3a1d649e69416fd3e697c2ac57b0aefc4" or
+        hash.sha256(0, filesize) ==
+        "619275b9a9a26e0093b4d15696a1c33565d24710c9825536444dbd4bde7d2085"
+}
+
+rule phishkit_docusign {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-12"
+        description = "Known Docusign PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "9136e3ca8d6425e9ccc529accfb6e321e3048b7e84c87940b9f40297bc704120"
+
+}
+
+rule phishkit_dropbox {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-12"
+        updated = "2018-06-15"
+        description = "Known DropBox PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "2573c007b4e2a0e212000aaa890f74ed93131f19bdd6b007d38d5838a3b7213b" or
+        hash.sha256(0, filesize) ==
+        "f142b9d1c062ab03d2ba654a62db59c56e094bbe7cbdb2186cf4720f0bd94c71" or
+        hash.sha256(0, filesize) ==
+        "79cf5811a1978495d2b3889decadb8b804e84a6112b28d5ef09131efb3ea8b0e" or
+        hash.sha256(0, filesize) ==
+        "230acb8e2d503f7afbe44f327fbb97e0e9bb4211a4829734f79462084ffc12f7"
+
+}
+
+rule phishkit_ebay {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-12"
+        updated = "2018-06-15"
+        description = "Known EBay PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "1f2877f7d321db68f846ef31da699de369ce4e2f3ea7b2ddfe380a8a112504f8" or
+        hash.sha256(0, filesize) ==
+        "568c68ba79ab068322d8677f4de419d8d9fe9a381d93fcbb6c978357030fb6ca" or
+        hash.sha256(0, filesize) ==
+        "920d5aa45a4e373eb56d3face29df6991a9363c5e64ebbabad0136011efd25af" or
+        hash.sha256(0, filesize) ==
+        "892f6ae0bb05af17c0277390d37e76cc5351abf166779322a5ace3e274617077"
+}
+
+rule phishkit_google {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-12"
+        updated = "2018-06-15"
+        description = "Known Google PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "1cc4118e6e16ce0ea202a0576f616b72f5ef809cef559ca8d57a75ae994f3430" or
+        hash.sha256(0, filesize) ==
+        "894d75e8c73498b5ef2abaa8b7322db6f544ef28120ce62227897c9206b21532" or
+        hash.sha256(0, filesize) ==
+        "f3413e26426829ba37e57bcbf90bafed995678a848cec796cb2d25a688abf4bb" or
+        hash.sha256(0, filesize) ==
+        "e64f325fe9dcb3a2ed115a746af95a805eafa801805308846c75443b22724461" or
+        hash.sha256(0, filesize) ==
+        "23f4b930fc7e9d00e364c821db657cd55523355c1a1c41cd1e7880ac6658865c"
+
+
+rule phishkit_adobe {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-12"
+        description = "Known Adobe PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "40af3b2320e8b96dade4e833e1bb69dc358e7d3a8d2c7e7f861bd7029b7a37ed" or
+        hash.sha256(0, filesize) ==
+        "85832a43957b367dbf48e33b0d8f4b45a29e59d81783a002c0f4d911c6c37dd3"
+
+}
+
+rule phishkit_banking {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-13"
+        updated = "2018-06-15"
+        description = "Known banking PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "362f680698361c71427e2020546a397d08c287530d2c96cf53c6876b0c481ede" or
+        hash.sha256(0, filesize) ==
+        "bf1971f78baef3b06064065b917c8c947846071a20cb50d8ca85ee0c3683a8df" or
+        hash.sha256(0, filesize) ==
+        "2cd5d8921cffc85b97ff78404ad6ff40ac7bc792e0490e873a094031e2c96f3c" or
+        hash.sha256(0, filesize) ==
+        "ac7357307f4703e891f5efd2a6af05358e7206a968f07b82edfc1e0ee2988a02" or
+        hash.sha256(0, filesize) ==
+        "c77d594904e754d099b64c2ce48c52e225f2b90d1f0a7f2e72b42404c29332a8" or
+        hash.sha256(0, filesize) ==
+        "3cc66884444fed57419aee787130d6cb2bc9bc30a4b7043988df2cff2a9ae6c5" or
+        hash.sha256(0, filesize) ==
+        "7b75705ab3e9c2101309b557a24aef130c97f13eb71bf7ec6e9c3b425c625eba" or
+        hash.sha256(0, filesize) ==
+        "85d990b9177d5a5a79a14a6464f98733df48d472a64a48eac9f598b87259dc88" or
+        hash.sha256(0, filesize) ==
+        "a1dd2feb403bce675c1a363f70b130cb859b2d81e3b26087c998f563ef9d5774" or
+        hash.sha256(0, filesize) ==
+        "81773583cfacd55287833896048da4ca1aa3bfff5be10080d11efc3419a53428" or
+        hash.sha256(0, filesize) ==
+        "5cc3fdc73b1d559832fede5f1af789fb65ce8f2f1f7f1e9109bbf5a7b355fa4f" or
+        hash.sha256(0, filesize) ==
+        "f5bb88065e8e6017c43f237dcbd635538a8e60d7c4297a30f306aa4dbe37b2bc" or
+        hash.sha256(0, filesize) ==
+        "d5541b9eb60735954c68ef4e9a69aa8624e5c6c6028d877e17ccc7fafc1e74a2" or
+        hash.sha256(0, filesize) ==
+        "abbee02ce3d8d085fabf0bdca0495581a06178d6669e4fb0bb898516ef979526" or
+        hash.sha256(0, filesize) ==
+        "80f58ef6b091b86d5b9eeee78947d82ecb04d82b7076ee6858437a6443bbfee7" or
+        hash.sha256(0, filesize) ==
+        "2d4f444893784b2cce566db0fb89c0db3f82dcb9dc1cb3c7ba4eed027ccf72dc"
+
+}
+
+rule phishkit_telecom {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-15"
+        description = "Known telecommunications PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "2df34379555e4ed0bed9cac3ef262fc9b401608f3a54692a1479e18a8e875472" or
+        hash.sha256(0, filesize) ==
+        "cb850a4b1aa17c242f425a0ce15fc93a1b27d732f77b8f08892f745f99f26916" or
+        hash.sha256(0, filesize) ==
+        "c8b3f703b1539d0882ca6941320625d62867d09552f68db5faf8faacb3d9a6b3"
+
+}
+
+rule phishkit_logistics {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-15"
+        description = "Known Logistics PhishKits (USPS, DHL, China EMS, etc.)"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "356e7a17be57e36239f3aad7d8c7c6c362ae272700b639ec230f032cb8980f23" or
+        hash.sha256(0, filesize) ==
+        "424357066cb9585a02bc918515ca4fe365ef10d3e3e32017bf4f025346dedb97"
+
+}
+
+rule phishkit_multi {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-15"
+        description = "Known multi-account PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "e5196ccbf1480d54f9af749d2ad136b0081b499cac71015db9094fcb10cfd91a" or
+        hash.sha256(0, filesize) ==
+        "d3bf33d3fdd2ceddeb2bf66004c0eda34368763caeeb2b75b35e7427e573eb6a" or
+        hash.sha256(0, filesize) ==
+        "b7b84d9fc009049a3d5f9b94eed6bb797df47ef855f8d8450fb5f70b7165d190" or
+        hash.sha256(0, filesize) ==
+        "02211bb6245b7db834638f200b3b15ff7c8142bf3a9e54f92f4e71bc41914154" or
+        hash.sha256(0, filesize) ==
+        "be038fad040beecb2dbe9f348819e2d4273ecb1e21a6d3ac45a8419ba476a607" or
+        hash.sha256(0, filesize) ==
+        "d4faad42d3b3d1048d95ee907d617f980f1c5b60a337ec0f466fb292cf91a172" or
+        hash.sha256(0, filesize) ==
+        "410b2e33227c6f9d3d0016a2f033b3d8b4880161e74db96a983369e583ff3d98"
+}
+
+rule phishkit_unknown {
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-15"
+        description = "hashes of unknown PhishKits"
+
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "d139dae69d056958e8b7cc3deaad5a8509aac27e3f2af44ec0861e519f020a1b" or
+        hash.sha256(0, filesize) ==
+        "abff679ee32bc36d009d5fc282d31176ea5c626a24a1bff8446f91a4ed58a5f4" or
+        hash.sha256(0, filesize) ==
+        "323ffa607fd2104b821c6862228be2dc5f28731ddaffc7475b29bc159c039605" or
+        hash.sha256(0, filesize) ==
+        "51819d3abdb48a05ed2ba7e15287534e33d27722ddb168c596e3f8bf4d07d090" or
+        hash.sha256(0, filesize) ==
+        "cc98207885c0531a5cb05692e847f534bf4284c417883075fd4fbeab9c94226c" or
+        hash.sha256(0, filesize) ==
+        "c0ddb7ae4e3f543ef80c12dcc3a02541b824fc901bc64b4b1063be8cfac93dd4" or
+        hash.sha256(0, filesize) ==
+        "b660bf63ee9968145578b3dd61490f499ac2a885b026423a0adbe8f849b19f32"
+}
+
+rule phishkit_wetransfer {
+     meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+         date = "2020-04-17"
+         description = "known WeTransfer PhishKits"
+
+     condition:
+         hash.sha256(0, filesize) ==
+         "d4699b646e6dc170d5b3e5357005f7b14f3e560df36b51c0b49dd67dd8fdf55b" or
+         hash.sha256(0, filesize) ==
+         "977824855e556c74cda74182b84ef7c32adc5a8ec7c33d4b2b3049e4fe0ff07c" or
+         hash.sha256(0, filesize) ==
+         "2dedbe18cbdf139591b978e385252ce4c421a50c6377e95d55fbfe5906492eb3"
+}
+
+rule phishkit_yahoo {
+
+    meta:
+        author = "Maria Rebecca  Castillo"
+        author_email = "marybecky@fishlabs.com"
+        date = "2018-06-15"
+        description = "Known Yahoo PhishKits"
+
+    condition:
+        hash.sha256(0, filesize) ==
+        "81689970d6d2c70ba5168cb43bcbc54603950a2b59fa581d0e415fa5b7cb18a4" or
+        hash.sha256(0, filesize) ==
+        "ba09cfcc5bf34305bfb063bfce77cff7bf3f2f1714731872decdbeec813636f0" or
+        hash.sha256(0, filesize) ==
+        "1b81fe5a48f605e73501e04fd181b8890db4b1428f38003f9ca6b4c8155f405d" or
+        hash.sha256(0, filesize) ==
+        "1fc6768ae8eb4f0d36c16d694dfbef31be687b80f49ffd42d22465e5e32ec96a" or
+        hash.sha256(0, filesize) ==
+        "357968558653410ebbe22221d1e9a558fe6598517be540f5b1ca3ec6106c26d1"
+
+}
+© 2021 GitHub, Inc.
