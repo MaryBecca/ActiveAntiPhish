@@ -13,7 +13,7 @@ Practice
 You can use the ActiveAntiPhish command line application by downloading the linux release or by installing the rust toolchain and installing aap with cargo install aap. You will then be able to run the aap program from the command line.
 
 ActiveAntiPhish 0.3.0	GNU-GPL-3.0
-Chad Baxter <cbax@doslabelectronics.com>
+Maria Rebecca Castillo <marybecky@fishlabs.com>
 Saturate the bad guys' databases.
 
 USAGE:
