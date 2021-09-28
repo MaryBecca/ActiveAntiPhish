@@ -10,12 +10,10 @@ It generates hundreds of fake username/password pairs that are injected into the
 The theory is that the phisher will abandon their database as validating thousands of fake accounts just to find the small amount of valid accounts is very annoying.
 
 Practice
-
 You can use the ActiveAntiPhish command line application by downloading the linux release or by installing the rust toolchain and installing aap with cargo install aap. You will then be able to run the aap program from the command line.
 
-aap Help
 ActiveAntiPhish 0.3.0	GNU-GPL-3.0
-Maria Rebecca  Castillo <marybecky@fishlabs.com>
+Chad Baxter <cbax@doslabelectronics.com>
 Saturate the bad guys' databases.
 
 USAGE:
@@ -43,6 +41,7 @@ OPTIONS:
     -t, --time <run_time>             Number of seconds until program exits.
     -n, --threads <threads>           Number of threads to use. Default: 20
     -u, --url <url>                   The path to the endpoint to POST fake data to.
+
 Phish Kit Collection
 This project maintains a collection of active and inactive phish kits that are unredacted. They are encrypted to protect from leechers and to protect the identities of hackers. Please contact me to be vetted for the decryption password.
 
