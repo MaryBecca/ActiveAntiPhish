@@ -16,6 +16,7 @@ ActiveAntiPhish 0.3.0	GNU-GPL-3.0
 Maria Rebecca Castillo <marybecky@fishlabs.com>
 Saturate the bad guys' databases.
 
+
 USAGE:
     aap [FLAGS] [OPTIONS] --time <run_time> --threads <threads> --url <url>
 
@@ -41,12 +42,3 @@ OPTIONS:
     -t, --time <run_time>             Number of seconds until program exits.
     -n, --threads <threads>           Number of threads to use. Default: 20
     -u, --url <url>                   The path to the endpoint to POST fake data to.
-
-Phish Kit Collection
-This project maintains a collection of active and inactive phish kits that are unredacted. They are encrypted to protect from leechers and to protect the identities of hackers. Please contact me to be vetted for the decryption password.
-
-YARA Rules
-In the rules directory you can find a yara ruleset for the phishkits in this repo as well as a generic rule for detecting phishing page source code (phish kits all use a similar design/coding style).
-
-Advisories
-You can find current phishing advisories in ADVISORIES.md.
